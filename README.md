@@ -1,6 +1,6 @@
 # Automatización de plataforma Sentra Tasks
 
-## Estas son las funcionalidades principales que fueron consideradas como historias de usuario para realizar en este programa:
+### Estas son las funcionalidades principales que fueron consideradas como historias de usuario para realizar en este programa:
 
 -Registro de usuario: Se realiza en primera instancia un registro de usuario de forma correcta, para despues realizar un segundo registro en donde no coincidan las contraseñas y se considere como fallido el registro de usuario junto a un error que aparece.
 
