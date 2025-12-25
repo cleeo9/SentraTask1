@@ -18,7 +18,7 @@
 
 -Ordenar tareas por prioridad: Se realiza un login en la cuenta de usuario, desde la vista de tareas se puede ordenar de forma ascendente y descendente por el numero de Prioridad de la tarea.
 
--Ordenar tareas por fecha de Vencimiento: Se realiza un login en la cuenta de usuario, desde la vista de tareas se puede ordenar de forma ascendente y descendente por la fecha de Vencimiento de la tarea.
+-Ordenar tareas por fecha de Termino: Se realiza un login en la cuenta de usuario, desde la vista de tareas se puede ordenar de forma ascendente y descendente por la fecha de Vencimiento de la tarea.
 
 -Marcar tarea como realizada: Se realiza un login en la cuenta de usuario, desde la vista de tareas no aparece ninguna opcion para marcar como realiza la tarea, asi que la historia de usuario no corresponderia.
 
