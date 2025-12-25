@@ -10,7 +10,7 @@ Feature: Inicio de Sesión
 
     Examples:
       | email              | password |
-      | "pruebaregister12@gmail.com" | "123456"    |
+      | "pruebaregister12@gmail.com" | "123"    |
 
   Scenario Outline: Iniciar Sesión faillido
     Given Navego a la página de inicio
