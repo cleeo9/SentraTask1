@@ -10,79 +10,94 @@ import pages.MainPage;
 public class EditUserSteps {
 
     MainPage landingPage = new MainPage();
-    ProfilePage EditUserPage = new ProfilePage();
+    ProfilePage profilePage = new ProfilePage();
 
+    // Navegación
     @Given("Navego a la página del perfil")
-    public void iNavigateToprofile() {
+    public void navigateToProfile() {
         landingPage.navigateToProfile();
     }
 
     @And("Hago click en el botón Perfil")
     public void clickProfile() {
-        EditUserPage.clickProfile();
+        profilePage.clickProfile();
     }
 
-    // Scenario 2
+    // ===============================
+    // Scenario: Editar datos usuario
+    // ===============================
 
     @And("Hago click en el botón editar datos usuario")
     public void clickEditDataUser() {
-        EditUserPage.clickEditDataUser();
+        profilePage.clickEditDataUser();
     }
 
     @And("Se abre modal de modificación datos del usuario")
-    public void EditProfileWindow() {
-        Assert.assertTrue(EditUserPage.WindowEdit(), "No se levanta modal Modificar Datos Usuario");
+    public void editProfileWindow() {
+        Assert.assertTrue(
+                profilePage.isEditProfileModalDisplayed(),
+                "El modal de modificación de datos del usuario debería estar visible"
+        );
     }
 
     @And("Ingreso nuevo nombre {string}, nuevo apellido {string} y nuevo email {string}")
-    public void fillEditProfile(
-            String nombre, String apellido, String email) throws InterruptedException {
-        EditUserPage.fillEditProfile(nombre, apellido, email);
+    public void fillEditProfile(String nombre, String apellido, String email) {
+        profilePage.fillEditProfile(nombre, apellido, email);
     }
 
     @And("Hago click en el botón modificar usuario")
     public void clickEditUser() {
-        EditUserPage.clickEditUser();
+        profilePage.clickEditUser();
     }
 
     @Then("Los datos del usuario nombre {string}, apellido {string} y el email {string} se modifican correctamente")
-    public void se_muestra_mensaje(String nombre, String apellido, String email) {
-        Assert.assertTrue(EditUserPage.EditUserSuccess(nombre, apellido, email),
-                "Usuario no queda modificado correctamente");
+    public void editUserSuccess(String nombre, String apellido, String email) {
+        Assert.assertTrue(
+                profilePage.isEditUserSuccessful(nombre, apellido, email),
+                "Los datos del usuario deberían modificarse correctamente"
+        );
     }
 
-    // Scenario 3
+    // ===============================
+    // Scenario: Cambiar contraseña
+    // ===============================
 
     @Given("Hago click en el botón cambiar contraseña")
-    public void clickChangePass() {
-        EditUserPage.clickChangePass();
-
+    public void clickChangePassword() {
+        profilePage.clickChangePassword();
     }
 
     @And("Se abre modal de modificación de la contraseña")
-    public void EditPassWindow() {
-        Assert.assertTrue(EditUserPage.EditPassWindow(), "No se levanta modal Modificar la contraseña");
-
+    public void editPasswordWindow() {
+        Assert.assertTrue(
+                profilePage.isEditPasswordModalDisplayed(),
+                "El modal de modificación de contraseña debería estar visible"
+        );
     }
 
     @And("Ingreso nueva contraseña {string} y repito la nueva contraseña {string}")
-    public void Ingreso_nueva_contraseña_y_repito_la_nueva_contraseña(String contraseña, String repetirContraseña) {
-        landingPage.fillNewPassword(contraseña, repetirContraseña);
+    public void fillNewPassword(String password, String repeatPassword) {
+        landingPage.fillNewPassword(password, repeatPassword);
     }
 
     @And("Hago click en el botón Cambiar contraseña")
-    public void clickChangePassEnd() {
-        EditUserPage.clickChangePassEnd();
+    public void clickChangePasswordEnd() {
+        profilePage.clickChangePasswordEnd();
     }
 
     @Then("La contraseña del usuario se cambia correctamente")
-    public void ChangePassSuccess() {
-        Assert.assertTrue(EditUserPage.ChangePassSuccess(), "La contraseña del usuario no se cambia correctamente");
-
+    public void changePasswordSuccess() {
+        Assert.assertTrue(
+                profilePage.isChangePasswordSuccessful(),
+                "La contraseña del usuario debería cambiarse correctamente"
+        );
     }
 
     @Then("El boton modificar usuario se encuentra inhabilitado")
     public void editUserFail() {
-        Assert.assertFalse(EditUserPage.buttonStatus(), "El boton modificar usuario se encuentra habilitado");
+        Assert.assertFalse(
+                profilePage.isEditUserButtonEnabled(),
+                "El botón modificar usuario NO debería estar habilitado"
+        );
     }
 }

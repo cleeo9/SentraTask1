@@ -1,22 +1,37 @@
 package pages;
 
 public class ProfilePage extends BasePage {
+
     public ProfilePage() {
         super();
     }
 
-    private String buttonProfile = "//span[text()=\"Perfil\"]";
-    private String buttonEdit = "//button[text()=\"Editar Datos Usuario\"]";
-    private String nameUpdate = "//input[@id=\"firstname\"]";
-    private String lastnameUpdate = "//input[@id=\"lastname\"]";
-    private String emailUpdate = "//input[@id=\"email\"]";
-    private String openModalUpdate = "//h2[text()=\"Modificación Datos Usuario\"]";
-    private String buttonChangePass = "//button[text()=\"Cambiar Contraseña\"]";
-    private String buttonEditUser = "//button[text()=\"Modificar Usuario\"]";
-    private String getData = "//td[text()=\"%s\"]";
-    private String buttonChangePassEnd = "//div[@role=\"dialog\"]//button[text()=\"Cambiar Contraseña\"]";
-    private String modalPassChange = "//div[contains(text(),\"Contraseña cambiada\")]";
-    private String openModalChangePass = "//h2[text()=\"Cambiar Contraseña\"]";
+    // Locators
+    private String buttonProfile = "//span[text()='Perfil']";
+    private String buttonEdit = "//button[text()='Editar Datos Usuario']";
+    private String nameUpdate = "//input[@id='firstname']";
+    private String lastnameUpdate = "//input[@id='lastname']";
+    private String emailUpdate = "//input[@id='email']";
+    private String editProfileModal = "//h2[text()='Modificación Datos Usuario']";
+
+    private String buttonChangePassword = "//button[text()='Cambiar Contraseña']";
+    private String changePasswordModal = "//h2[text()='Cambiar Contraseña']";
+    private String buttonEditUser = "//button[text()='Modificar Usuario']";
+    private String buttonChangePasswordEnd =
+            "//div[@role='dialog']//button[text()='Cambiar Contraseña']";
+
+    private String passwordChangedMessage =
+            "//div[contains(text(),'Contraseña cambiada')]";
+
+    private String tableData = "//td[text()='%s']";
+
+    // =========================
+    // Actions
+    // =========================
+
+    public void clickProfile() {
+        clickElement(buttonProfile);
+    }
 
     public void clickEditDataUser() {
         clickElement(buttonEdit);
@@ -28,48 +43,47 @@ public class ProfilePage extends BasePage {
         write(emailUpdate, email);
     }
 
-    public boolean WindowEdit() {
-        return elementIsDisplayed(openModalUpdate);
-    }
-
-    public void clickProfile() {
-        clickElement(buttonProfile);
-    }
-
-    public void clickChangePass() {
-        clickElement(buttonChangePass);
-    }
-
     public void clickEditUser() {
         clickElement(buttonEditUser);
     }
 
-    public boolean EditUserSuccess(String nombre, String apellido, String email) {
-        return elementIsDisplayed(String.format(getData, nombre))
-                && elementIsDisplayed(String.format(getData, apellido))
-                && elementIsDisplayed(String.format(getData, email));
+    public void clickChangePassword() {
+        clickElement(buttonChangePassword);
     }
 
-    public void clickChangePassEnd() {
-        clickElement(buttonChangePassEnd);
+    public void clickChangePasswordEnd() {
+        clickElement(buttonChangePasswordEnd);
     }
 
-    public boolean ChangePassSuccess() {
-        return elementIsDisplayed(modalPassChange);
+    // =========================
+    // Validations (BOOLEAN)
+    // =========================
+
+    /** Modal edición usuario visible */
+    public boolean isEditProfileModalDisplayed() {
+        return elementIsDisplayed(editProfileModal);
     }
 
-    public boolean EditPassWindow() {
-        return elementIsDisplayed(openModalChangePass);
+    /** Modal cambio contraseña visible */
+    public boolean isEditPasswordModalDisplayed() {
+        return elementIsDisplayed(changePasswordModal);
     }
 
-    public boolean editUserFail(String nombre, String apellido, String email) {
-        return elementIsDisplayed(String.format(getData, nombre))
-                && elementIsDisplayed(String.format(getData, apellido))
-                && elementIsDisplayed(String.format(getData, email));
+    /** Usuario editado correctamente */
+    public boolean isEditUserSuccessful(String nombre, String apellido, String email) {
+        return elementIsDisplayed(String.format(tableData, nombre))
+                && elementIsDisplayed(String.format(tableData, apellido))
+                && elementIsDisplayed(String.format(tableData, email));
     }
 
-    public boolean buttonStatus() {
+    /** Contraseña cambiada correctamente */
+    public boolean isChangePasswordSuccessful() {
+        return elementIsDisplayed(passwordChangedMessage);
+    }
+
+    /** Botón modificar usuario habilitado */
+    public boolean isEditUserButtonEnabled() {
         return isElementClickable(buttonEditUser);
     }
-
 }
+
