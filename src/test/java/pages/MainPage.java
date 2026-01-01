@@ -21,7 +21,7 @@ public class MainPage extends BasePage {                                  //Cent
         super();
     }
 
-    public void iNavigateToSentraTsk() {          //Este bloque encapsula la navegación directa a distintas secciones del sistema
+    public void navigateToSentraTask() {          //Este bloque encapsula la navegación directa a distintas secciones del sistema
         navigateTo("http://192.168.80.43:10300");
 
     }

@@ -5,23 +5,23 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import pages.MainPage;
 
-public class SharedSteps {             //la clase contiene steps reutilizables
+public class SharedSteps {   // Steps reutilizables
 
     MainPage landingPage = new MainPage();
 
     @When("Ingreso el email {string} y contraseña {string}")
-    public void fillLoginForm(String email, String contraseña) {       //aca conecta un paso del archivo .feature con código Java
-        landingPage.fillLoginForm(email, contraseña);
+    public void fillLoginForm(String email, String contrasena) {
+        landingPage.fillLoginForm(email, contrasena);
     }
 
     @And("Hago click en el botón Ingresar")
-    public void hago_click_en_el_botón_ingresar() {
+    public void clickLoginButton() {
         landingPage.clickLogin();
     }
 
     @Given("Navego a la página de inicio")
-    public void iNavigateToSentraTsk() {
-        landingPage.iNavigateToSentraTsk();
+    public void navigateToSentraTask() {
+        landingPage.navigateToSentraTask();
     }
-
 }
+
