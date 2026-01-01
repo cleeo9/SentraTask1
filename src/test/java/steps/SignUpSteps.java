@@ -1,7 +1,6 @@
 package steps;
 
 import org.testng.Assert;
-
 import io.cucumber.java.en.*;
 import pages.MainPage;
 
@@ -10,45 +9,76 @@ public class SignUpSteps {
     MainPage landingPage = new MainPage();
 
     @When("Hago click en el botón de registro")
-    public void ToClickSignUp() throws InterruptedException {
+    public void clickSignUp() {
         landingPage.clickSignUp();
     }
 
     @Given("Se despliega modal con el formulario de registro")
-    public void SignUpWindow() {
-        Assert.assertTrue(landingPage.firstResult(), "No se levanta modal Registrar Usuario");
+    public void signUpWindowIsDisplayed() {
+        Assert.assertTrue(
+                landingPage.isRegisterButtonVisible(),
+                "No se levanta modal Registrar Usuario"
+        );
     }
 
     @Then("Hago click en botón Cancelar")
-    public void ToClickCancel() throws InterruptedException {
-        landingPage.ToClickCancel();
+    public void clickCancel() {
+        landingPage.clickCancel();
     }
 
-    @Given("Ingreso el nombre {string}, apellido {string} , email {string}, contraseña {string}")
-    public void ingreso_el_nombre_prueba_apellido_junior_email_prueba_gmail_com_contraseña(
-            String nombre, String apellido, String email, String contraseña) {
-        landingPage.fillSignUpForm(nombre, apellido, email, contraseña);
+    // Registro exitoso
+    @Given("Ingreso el nombre {string}, apellido {string}, email {string}, contraseña {string}")
+    public void fillValidSignUpForm(
+            String nombre,
+            String apellido,
+            String email,
+            String password) {
+
+        landingPage.fillSignUpForm(
+                nombre,
+                apellido,
+                email,
+                password,
+                password
+        );
     }
 
     @When("Hago click en el botón Registrar Usuario")
-    public void hago_clic_en_el_botón() {
+    public void clickRegister() {
         landingPage.clickRegister();
     }
 
     @Then("Se muestra mensaje Usuario creado correctamente")
-    public void se_muestra_mensaje() {
-        Assert.assertTrue(landingPage.successResult(), "Usuario no queda registrado correctamente");
+    public void signUpSuccessMessage() {
+        Assert.assertTrue(
+                landingPage.isSignUpSuccessful(),
+                "Usuario no queda registrado correctamente"
+        );
     }
 
+    // Registro fallido
     @Given("Ingreso el nombre {string}, apellido {string}, email {string}, contraseña {string} y contraseña incorrecta {string}")
-    public void ingreso_el_nombre_prueba_apellido_junior_email_prueba_gmail_com_contraseña_y_contraseña_fail(
-            String nombre, String apellido, String email, String contraseña, String contraseña2) {
-        landingPage.fillFailSignUpForm(nombre, apellido, email, contraseña, contraseña2);
+    public void fillInvalidSignUpForm(
+            String nombre,
+            String apellido,
+            String email,
+            String password,
+            String wrongPassword) {
+
+        landingPage.fillSignUpForm(
+                nombre,
+                apellido,
+                email,
+                password,
+                wrongPassword
+        );
     }
 
     @Then("Se muestra mensaje de error")
-    public void se_muestra_mensaje_fail() {
-        Assert.assertTrue(landingPage.failResult(), "Usuario registrado correctamente");
+    public void signUpFailMessage() {
+        Assert.assertTrue(
+                landingPage.isSignUpFailed(),
+                "Usuario registrado correctamente"
+        );
     }
-
 }

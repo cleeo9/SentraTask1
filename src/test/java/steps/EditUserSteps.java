@@ -14,7 +14,7 @@ public class EditUserSteps {
 
     @Given("Navego a la página del perfil")
     public void iNavigateToprofile() {
-        landingPage.iNavigateToprofile();
+        landingPage.navigateToProfile();
     }
 
     @And("Hago click en el botón Perfil")
@@ -67,7 +67,7 @@ public class EditUserSteps {
 
     @And("Ingreso nueva contraseña {string} y repito la nueva contraseña {string}")
     public void Ingreso_nueva_contraseña_y_repito_la_nueva_contraseña(String contraseña, String repetirContraseña) {
-        landingPage.fillNewPass(contraseña, repetirContraseña);
+        landingPage.fillNewPassword(contraseña, repetirContraseña);
     }
 
     @And("Hago click en el botón Cambiar contraseña")
