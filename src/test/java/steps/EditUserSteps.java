@@ -10,12 +10,14 @@ import pages.MainPage;
 public class EditUserSteps {
 
     MainPage landingPage = new MainPage();
-    ProfilePage profilePage = new ProfilePage();
+    // Es mejor usar un nombre más descriptivo que 'EditUserPage' si la clase es 'ProfilePage'
+    ProfilePage profilePage = new ProfilePage(); 
 
-    // Navegación
+    // ======= NAVEGACIÓN Y PERFIL =======
+
     @Given("Navego a la página del perfil")
-    public void navigateToProfile() {
-        landingPage.navigateToProfile();
+    public void iNavigateToprofile() {
+        landingPage.iNavigateToprofile();
     }
 
     @And("Hago click en el botón Perfil")
@@ -23,9 +25,7 @@ public class EditUserSteps {
         profilePage.clickProfile();
     }
 
-    // ===============================
-    // Scenario: Editar datos usuario
-    // ===============================
+    // ======= SCENARIO 2: MODIFICAR DATOS DEL PERFIL =======
 
     @And("Hago click en el botón editar datos usuario")
     public void clickEditDataUser() {
@@ -33,15 +33,14 @@ public class EditUserSteps {
     }
 
     @And("Se abre modal de modificación datos del usuario")
-    public void editProfileWindow() {
-        Assert.assertTrue(
-                profilePage.isEditProfileModalDisplayed(),
-                "El modal de modificación de datos del usuario debería estar visible"
-        );
+    public void EditProfileWindow() {
+        // [CORRECCIÓN] Mensaje de falla: Indica que el modal no se visualiza.
+        Assert.assertTrue(profilePage.WindowEdit(), "El modal de Modificación de Datos del Usuario NO está visible");
     }
 
     @And("Ingreso nuevo nombre {string}, nuevo apellido {string} y nuevo email {string}")
-    public void fillEditProfile(String nombre, String apellido, String email) {
+    public void fillEditProfile(
+            String nombre, String apellido, String email) throws InterruptedException {
         profilePage.fillEditProfile(nombre, apellido, email);
     }
 
@@ -51,53 +50,48 @@ public class EditUserSteps {
     }
 
     @Then("Los datos del usuario nombre {string}, apellido {string} y el email {string} se modifican correctamente")
-    public void editUserSuccess(String nombre, String apellido, String email) {
-        Assert.assertTrue(
-                profilePage.isEditUserSuccessful(nombre, apellido, email),
-                "Los datos del usuario deberían modificarse correctamente"
-        );
+    public void se_muestra_mensaje(String nombre, String apellido, String email) {
+        // [CORRECCIÓN] Mensaje de falla: Indica que la modificación no se pudo validar.
+        Assert.assertTrue(profilePage.EditUserSuccess(nombre, apellido, email),
+                "No se pudo validar que los datos del usuario se hayan modificado correctamente");
     }
 
-    // ===============================
-    // Scenario: Cambiar contraseña
-    // ===============================
+    // ======= SCENARIO 3: CAMBIAR CONTRASEÑA =======
 
     @Given("Hago click en el botón cambiar contraseña")
-    public void clickChangePassword() {
-        profilePage.clickChangePassword();
+    public void clickChangePass() {
+        profilePage.clickChangePass();
     }
 
     @And("Se abre modal de modificación de la contraseña")
-    public void editPasswordWindow() {
-        Assert.assertTrue(
-                profilePage.isEditPasswordModalDisplayed(),
-                "El modal de modificación de contraseña debería estar visible"
-        );
+    public void EditPassWindow() {
+        // [CORRECCIÓN] Mensaje de falla: Indica que el modal no se visualiza.
+        Assert.assertTrue(profilePage.EditPassWindow(), "El modal de Modificación de la Contraseña NO está visible");
     }
 
     @And("Ingreso nueva contraseña {string} y repito la nueva contraseña {string}")
-    public void fillNewPassword(String password, String repeatPassword) {
-        landingPage.fillNewPassword(password, repeatPassword);
+    public void Ingreso_nueva_contraseña_y_repito_la_nueva_contraseña(String contraseña, String repetirContraseña) {
+        landingPage.fillNewPass(contraseña, repetirContraseña);
     }
 
     @And("Hago click en el botón Cambiar contraseña")
-    public void clickChangePasswordEnd() {
-        profilePage.clickChangePasswordEnd();
+    public void clickChangePassEnd() {
+        profilePage.clickChangePassEnd();
     }
 
     @Then("La contraseña del usuario se cambia correctamente")
-    public void changePasswordSuccess() {
-        Assert.assertTrue(
-                profilePage.isChangePasswordSuccessful(),
-                "La contraseña del usuario debería cambiarse correctamente"
-        );
+    public void ChangePassSuccess() {
+        // [CORRECCIÓN] Mensaje de falla: Indica que la validación falló.
+        Assert.assertTrue(profilePage.ChangePassSuccess(), "No se muestra el mensaje de éxito del cambio de contraseña");
     }
+
+    // ======= SCENARIO 4: MODIFICACIÓN ERRÓNEA =======
 
     @Then("El boton modificar usuario se encuentra inhabilitado")
     public void editUserFail() {
-        Assert.assertFalse(
-                profilePage.isEditUserButtonEnabled(),
-                "El botón modificar usuario NO debería estar habilitado"
-        );
+        // [CORRECCIÓN] Mensaje de falla:
+        // Si la prueba falla (assertFalse devuelve 'false'), significa que el botón está habilitado ('true').
+        // El mensaje indica lo que la prueba encontró: "El botón modificar usuario se encuentra HABILITADO cuando no debería".
+        Assert.assertFalse(profilePage.buttonStatus(), "El boton modificar usuario se encuentra HABILITADO");
     }
 }

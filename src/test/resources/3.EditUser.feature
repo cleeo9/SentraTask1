@@ -5,7 +5,7 @@ perfil actualizado.
 
   Background: Se hace Login a la página
     Given Navego a la página de inicio
-    When Ingreso el email "pruebaregister12@gmail.com" y contraseña "123456"
+    When Ingreso el email "pruebaregister15@gmail.com" y contraseña "123456"
     And Hago click en el botón Ingresar
 
   Scenario: Validar que estoy en la página del Perfil
@@ -17,9 +17,9 @@ perfil actualizado.
     When Navego a la página del perfil
     And Hago click en el botón editar datos usuario
     And Se abre modal de modificación datos del usuario
-    And Ingreso nuevo nombre "Juanito", nuevo apellido "Perez" y nuevo email "pruebaregister12@gmail.com"
+    And Ingreso nuevo nombre "Juanito", nuevo apellido "Perez" y nuevo email "pruebaregister15@gmail.com"
     And Hago click en el botón modificar usuario
-    Then Los datos del usuario nombre "Juanito", apellido "Perez" y el email "pruebaregister12@gmail.com" se modifican correctamente
+    Then Los datos del usuario nombre "Juanito", apellido "Perez" y el email "pruebaregister15@gmail.com" se modifican correctamente
 
   Scenario: Cambiar contraseña de usuario
     Given Hago click en el botón Perfil

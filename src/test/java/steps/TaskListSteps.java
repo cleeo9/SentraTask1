@@ -2,7 +2,6 @@ package steps;
 
 import org.testng.Assert;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.HomePage;
@@ -14,18 +13,18 @@ public class TaskListSteps {
     TaskPage taskPage = new TaskPage();
 
     @When("Hago click en el botón Home")
-    public void ClickHome() {
+    public void clickHomeButton() { // <-- Nombre de método corregido a camelCase
         homePage.clickHome();
     }
 
-    @And("Estoy en la pantalla Home")
-    public void NavigateHome() {
-        Assert.assertTrue(homePage.NavigateHome(), "No se levanta modal Modificar Datos Usuario");
+    // NUEVO PASO @THEN para verificar la navegación (Resultado de la acción anterior)
+    @Then("Estoy en la pantalla Home") 
+    public void validateHomePageNavigation() { // <-- Método renombrado y con mejor semántica
+        Assert.assertTrue(homePage.NavigateHome(), "La navegación a la página Home ha fallado");
     }
 
     @Then("Se Visualizan las tareas asignadas a mi cuenta")
-    public void TaskList() {
-        Assert.assertTrue(taskPage.TaskList(), "No se visualizan las tareas");
-
+    public void validateTaskListIsDisplayed() { // <-- Método renombrado
+        Assert.assertTrue(taskPage.TaskList(), "No se visualizan las tareas asignadas");
     }
 }
