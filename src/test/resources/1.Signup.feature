@@ -18,7 +18,7 @@ Feature: Registro de usuario
 
     Examples:
       | name     | lastname    | e-mail                      | password |
-      | "Prueba1" | "Registrar" | "pruebaregister15@gmail.com" | "123456" |
+      | "Prueba1" | "Registrar" | "pruebaregister16@gmail.com" | "123456" |
 
   Scenario Outline: Registrar usuario faillido
     Given Ingreso el nombre <name>, apellido <lastname>, email <e-mail>, contraseña <password> y contraseña incorrecta <password2>
